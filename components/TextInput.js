@@ -7,7 +7,7 @@ const TextInput = ({ value, onChange }) => {
       value={value}
       onChange={onChange}
       className="text-input"
-      placeholder="Enter your text here"
+      placeholder="Enter your prompt here"
     />
   );
 };

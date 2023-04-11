@@ -32,13 +32,21 @@ export default async function (req, res) {
     return;
   }
 
+  const userMessages = req.body.userMessages || [];
+  const assistantMessages = req.body.assistantMessages || [];
+
   try {
     const userMessage = {
       role: "user",
       content: payload,
     };
 
-    const messages = [...defaultPrompts, userMessage];
+    const messages = [
+      ...defaultPrompts,
+      ...userMessages.map((content) => ({ role: "user", content })),
+      ...assistantMessages.map((content) => ({ role: "assistant", content })),
+      userMessage,
+    ];
 
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
