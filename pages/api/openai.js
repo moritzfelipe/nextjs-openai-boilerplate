@@ -1,6 +1,7 @@
 // filename: openai.js
 // file location: /pages/api/openai.js
 import { Configuration, OpenAIApi } from "openai";
+import defaultPrompts from "../../prompts/defaultPrompts";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,7 +9,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 console.log('API Key:', process.env.OPENAI_API_KEY);
-// eslint-disable-next-line import/no-anonymous-default-export
+
 export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
@@ -32,16 +33,22 @@ export default async function (req, res) {
   }
 
   try {
+    const userMessage = {
+      role: "user",
+      content: payload,
+    };
+
+    const messages = [...defaultPrompts, userMessage];
+
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [{"role": "system", "content": payload}],
+      messages: messages,
       temperature: 0,
       max_tokens: 510,
-      "top_p": 0
+      "top_p": 0,
     });
     res.status(200).json({ result: completion.data.choices[0].message.content });
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
