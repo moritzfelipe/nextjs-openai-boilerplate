@@ -1,16 +1,15 @@
-import React from 'react';
-
 const ResponseDisplay = ({ data, error, loading }) => {
   let content;
 
   if (loading) {
-    content = 'Loading...';
+    content = "Loading...";
   } else if (error) {
     content = `Error: ${error.message}`;
   } else if (data) {
-    content = data.result;
+    console.log(data);
+    content = "";
   } else {
-    content = 'No data';
+    content = "";
   }
 
   return (
