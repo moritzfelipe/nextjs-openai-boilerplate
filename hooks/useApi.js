@@ -2,11 +2,12 @@
 // file location: /hooks/useApi.js
 import { useState, useEffect } from "react";
 
-const useApi = (url, method, payload) => {
+const useApi = (url, method, options) => {
   // Define the state variables for data, error, and loading
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const { setMessages, submitValue: payload } = options;
 
   // Use useEffect to make the API call when the payload changes
   useEffect(() => {
@@ -31,6 +32,11 @@ const useApi = (url, method, payload) => {
           );
         }
 
+        // Update messages in the application.
+        setMessages((messages) => [
+          ...messages,
+          { role: "assistant", content: result.result },
+        ]);
         setData(result); // Set the data state with the API response
         setError(null); // Reset the error state to null
       } catch (error) {

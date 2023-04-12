@@ -1,20 +1,40 @@
-import Head from 'next/head';
-import { Inter } from 'next/font/google';
-import { useState } from 'react';
-import TextInput from '@/components/TextInput';
-import SubmitButton from '@/components/SubmitButton';
-import ResponseDisplay from '@/components/ResponseDisplay';
-import useApi from '@/hooks/useApi';
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import { useState } from "react";
+import TextInput from "@/components/TextInput";
+import SubmitButton from "@/components/SubmitButton";
+import ResponseDisplay from "@/components/ResponseDisplay";
+import useApi from "@/hooks/useApi";
+import Conversation from "@/components/Conversation";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [submitValue, setSubmitValue] = useState('');
-  const { data, error, loading } = useApi('/api/openai', 'POST', submitValue);
+  const [messages, setMessages] = useState([
+    {
+      role: "system",
+      content:
+        "Hello, I'm Doggy your assistant to generate creative pet names.",
+    },
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const [submitValue, setSubmitValue] = useState("");
+  const { data, error, loading } = useApi("/api/openai", "POST", {
+    submitValue,
+    setMessages,
+  });
+
+  // console.log(messages);
 
   const handleSubmit = () => {
-    setSubmitValue(inputValue);
+    setMessages((messages) => [
+      ...messages,
+      { role: "user", content: inputValue },
+    ]);
+    setSubmitValue(
+      JSON.stringify([...messages, { role: "user", content: inputValue }])
+    );
+    setInputValue("");
   };
 
   const handleInputChange = (event) => {
@@ -31,7 +51,7 @@ export default function Home() {
       </Head>
       <main className="container">
         <h1 className={inter.className}>NextJS OpenAI Boilerplate</h1>
-        <p className={inter.className}> Enter a prompt below and click submit to get a response from OpenAI.</p>
+        <Conversation messages={messages} />
         <ResponseDisplay data={data} error={error} loading={loading} />
         <TextInput value={inputValue} onChange={handleInputChange} />
         <SubmitButton onClick={handleSubmit} disabled={loading} />

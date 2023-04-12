@@ -8,7 +8,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-console.log('API Key:', process.env.OPENAI_API_KEY);
+console.log("API Key:", process.env.OPENAI_API_KEY);
 
 export default async function (req, res) {
   if (!configuration.apiKey) {
@@ -33,21 +33,24 @@ export default async function (req, res) {
   }
 
   try {
-    const userMessage = {
-      role: "user",
-      content: payload,
-    };
-
-    const messages = [...defaultPrompts, userMessage];
+    // const userMessage = {
+    //   role: "user",
+    //   content: payload,
+    // };
+    const promptMessages = JSON.parse(payload);
+    // const messages = [...defaultPrompts, userMessage];
+    const messages = [...defaultPrompts, ...promptMessages];
 
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: messages,
       temperature: 0,
       max_tokens: 510,
-      "top_p": 0,
+      top_p: 0,
     });
-    res.status(200).json({ result: completion.data.choices[0].message.content });
+    res
+      .status(200)
+      .json({ result: completion.data.choices[0].message.content });
   } catch (error) {
     if (error.response) {
       console.error(error.response.status, error.response.data);
