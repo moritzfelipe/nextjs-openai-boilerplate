@@ -24,16 +24,17 @@ export default function Home() {
     setMessages,
   });
 
-  // console.log(messages);
-
   const handleSubmit = () => {
+    // add user message
     setMessages((messages) => [
       ...messages,
       { role: "user", content: inputValue },
     ]);
+    // submit a value to the API
     setSubmitValue(
       JSON.stringify([...messages, { role: "user", content: inputValue }])
     );
+    // clear input
     setInputValue("");
   };
 

@@ -23,6 +23,7 @@ export default async function (req, res) {
 
   const payload = req.body.payload || "";
   console.log("The payload is: ", payload);
+
   if (payload.trim().length === 0) {
     res.status(400).json({
       error: {
