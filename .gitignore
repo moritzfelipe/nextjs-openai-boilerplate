@@ -12,3 +12,7 @@ node_modules
 
 # Node.js dependency lock files
 package-lock.json
+
+# generated file 
+file_content.txt
+generated_comments.md

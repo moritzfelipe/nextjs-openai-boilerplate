@@ -38,3 +38,4 @@ function generateContentForFolders() {
 }
 
 generateContentForFolders();
+module.exports = generateContentForFolders
