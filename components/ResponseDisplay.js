@@ -10,7 +10,7 @@ const ResponseDisplay = ({ data, error, loading }) => {
   } else if (data) {
     content = data.result;
   } else {
-    content = 'No data';
+    content = '';
   }
 
   return (
