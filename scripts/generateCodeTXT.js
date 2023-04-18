@@ -36,7 +36,7 @@ function generateContentForFolders() {
     content += printContent(folderPath, '  ', folder);
   });
 
-  fs.writeFileSync('generatedCodeContent.txt', content);
+  fs.writeFileSync('projectCode.txt', content);
   console.log('File content generated successfully.');
 }
 
