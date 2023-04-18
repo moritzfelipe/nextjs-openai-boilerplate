@@ -1,3 +1,6 @@
+// filename: 
+// file location: /
+
 const fs = require('fs');
 const path = require('path');
 
@@ -33,7 +36,7 @@ function generateContentForFolders() {
     content += printContent(folderPath, '  ', folder);
   });
 
-  fs.writeFileSync('file_content.txt', content);
+  fs.writeFileSync('generatedCodeContent.txt', content);
   console.log('File content generated successfully.');
 }
 

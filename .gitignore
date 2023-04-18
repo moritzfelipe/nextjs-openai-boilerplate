@@ -14,5 +14,5 @@ node_modules
 package-lock.json
 
 # generated file 
-file_content.txt
+generatedCodeContent.txt
 generated_comments.md
