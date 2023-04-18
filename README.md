@@ -84,7 +84,7 @@ const completion = await openai.createChatCompletion({
 
 > top_p: (number, optional) - Controls the diversity of the generated completions by limiting the choices to a subset of the most likely tokens. A lower value (e.g., 0.2) makes the output more focused, while a higher value (e.g., 0.8) makes it more diverse.
 
-Form more please use openai [documantation](https://platform.openai.com/docs/introduction)
+Form more please use the OpenAI [documantation](https://platform.openai.com/docs/introduction).
 
 ## Customizing Prompts
 
