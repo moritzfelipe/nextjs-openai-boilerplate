@@ -55,6 +55,37 @@ Before you start, you'll need to have the following installed on your machine:
 
 6.  Open your browser and navigate to [http://localhost:3000](http://localhost:3000/). You should now see the boilerplate application running.
 
+
+## OpenAI API: Generating Chat Completions
+
+The `openai.createChatCompletion()` function is part of the OpenAI API, which allows developers to generate text using machine learning models. Specifically, `createChatCompletion()` is used to generate completions for chat-based models, such as the GPT-3.5-turbo model, which is designed for generating responses in a conversational format.
+
+### Usage
+
+```javascript
+const completion = await openai.createChatCompletion({
+  model: "gpt-3.5-turbo",
+  messages: messages,
+  temperature: 0,
+  max_tokens: 510,
+  top_p: 0,
+});
+```
+
+### Parameters
+
+> model: (string, required) - Specifies the name of the model to use for generating completions. In this example, "gpt-3.5-turbo" is used, which is a chat-based language model.
+
+> messages: (array of objects, required) - Specifies an array of message objects, where each object has a role ("system", "user", or "assistant") and content (the actual text of the message). Messages are processed in the order they appear in the array, and the assistant responds accordingly.
+
+> temperature: (number, optional) - Controls the randomness of the generated completions. A higher value (e.g., 0.8) makes the output more random, while a lower value (e.g., 0.2) makes it more deterministic.
+
+> max_tokens: (number, optional) - Specifies the maximum number of tokens (words or word pieces) in the generated completion. Use this to limit the length of the output.
+
+> top_p: (number, optional) - Controls the diversity of the generated completions by limiting the choices to a subset of the most likely tokens. A lower value (e.g., 0.2) makes the output more focused, while a higher value (e.g., 0.8) makes it more diverse.
+
+Form more please use openai [documantation](https://platform.openai.com/docs/introduction)
+
 ## Customizing Prompts
 
 To customize the prompts or add new message types, update the `defaultPrompts` array in the `prompts/defaultPrompts.js` file or create new files for different sets of prompts in the `prompts` folder.

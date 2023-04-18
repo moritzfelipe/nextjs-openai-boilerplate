@@ -15,7 +15,8 @@ export default function Home() {
   const [assistantMessages, setAssistantMessages] = useState([]);
   const { data, error, loading } = useApi('/api/openai', 'POST', submitValue, userMessages, assistantMessages);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setSubmitValue(inputValue);
     setUserMessages([...userMessages, inputValue]);
 
@@ -40,9 +41,11 @@ export default function Home() {
         <h1 className={inter.className}>NextJS OpenAI Boilerplate</h1>
         <p className={inter.className}> Test this boilerplate with a prompt, such as a request for a pet name, and the AI will respond while keeping track of the conversation.
         </p>
-        <ResponseDisplay data={data} error={error} loading={loading} />
-        <TextInput value={inputValue} onChange={handleInputChange} />
-        <SubmitButton onClick={handleSubmit} disabled={loading} />
+        <form>
+          <ResponseDisplay data={data} error={error} loading={loading} />
+          <TextInput value={inputValue} onChange={handleInputChange} />
+          <SubmitButton onClick={handleSubmit} disabled={loading} />
+        </form>
       </main>
     </>
   );

@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:structure": "node scripts/generateFileStructure.js"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "next": "^13.3.0",
     "openai": "^3.2.1"
   }
