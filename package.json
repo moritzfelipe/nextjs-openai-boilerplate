@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:structure": "node scripts/generateCodeTXT.js"
+    "generateTXT": "node scripts/generateCodeTXT.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
