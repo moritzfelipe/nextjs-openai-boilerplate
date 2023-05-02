@@ -8,7 +8,7 @@ const path = require('path');
 const projectPath = './';
 
 // Specify the folders to print the content
-const foldersToPrintContent = ['pages', 'components', 'hooks', 'styles'];
+const foldersToPrintContent = ['pages', 'components', 'hooks', 'styles', 'prompts'];
 
 function printContent(dir, prefix = '', folderName = '') {
   let fileContent = '';
