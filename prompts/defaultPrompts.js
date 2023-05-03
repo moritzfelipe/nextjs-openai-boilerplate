@@ -6,4 +6,4 @@ const defaultPrompts = [
     }
   ];
   
-  export default defaultPrompts;  
+  export default defaultPrompts;
