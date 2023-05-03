@@ -44,9 +44,6 @@ export default async function (req, res) {
     return;
   }
 
-  const userMessages = req.body.userMessages || [];
-  const assistantMessages = req.body.assistantMessages || [];
-
   try {
     // Create a user message object
     const userMessage = {
@@ -54,19 +51,7 @@ export default async function (req, res) {
       content: payload,
     };
 
-    // Combine default prompts, user messages, and assistant messages into an array of messages
-    // Each message object has a 'role' (either "user" or "assistant") and 'content'
-    // @param {array} defaultPrompts - Array of default prompts
-    // @param {array} userMessages - Array of user messages
-    // @param {array} assistantMessages - Array of assistant messages
-    // @param {object} userMessage - User message object
-    // @return {array} - Array of messages to be used in OpenAI API call
-    const messages = [
-      ...defaultPrompts,
-      ...userMessages.map((content) => ({ role: "user", content })),
-      ...assistantMessages.map((content) => ({ role: "assistant", content })),
-      userMessage,
-    ];
+    const messages = [...defaultPrompts, userMessage];
 
     // Call the OpenAI API to create a chat completion
     const completion = await openai.createChatCompletion({

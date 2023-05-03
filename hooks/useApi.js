@@ -2,7 +2,7 @@
 // file location: /hooks/useApi.js
 import { useState, useEffect } from "react";
 
-const useApi = (url, method, payload, userMessages, assistantMessages) => {
+const useApi = (url, method, payload) => {
   // Define the state variables for data, error, and loading
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -19,11 +19,7 @@ const useApi = (url, method, payload, userMessages, assistantMessages) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            payload,
-            userMessages,
-            assistantMessages,
-          }),
+          body: JSON.stringify({ payload }),
         });
 
         const result = await response.json();
@@ -46,7 +42,7 @@ const useApi = (url, method, payload, userMessages, assistantMessages) => {
     if (payload) {
       fetchData(); // Call fetchData only if payload is provided
     }
-  }, [url, method, payload, userMessages, assistantMessages]);
+  }, [url, method, payload]);
 
   // Return the data, error, and loading states from the hook
   return { data, error, loading };

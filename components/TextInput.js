@@ -5,7 +5,7 @@ const TextInput = ({ value, onChange }) => {
       value={value}
       onChange={onChange}
       className="text-input"
-      placeholder="Enter your prompt here (e.g. 'I want a pet name for my dog')"
+      placeholder="Enter your prompt here (e.g. 'Name for a pet dog')"
     />
   );
 };

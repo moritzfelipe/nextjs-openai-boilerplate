@@ -11,18 +11,11 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [submitValue, setSubmitValue] = useState('');
-  const [userMessages, setUserMessages] = useState([]);
-  const [assistantMessages, setAssistantMessages] = useState([]);
-  const { data, error, loading } = useApi('/api/openai', 'POST', submitValue, userMessages, assistantMessages);
+  const { data, error, loading } = useApi('/api/openai', 'POST', submitValue);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitValue(inputValue);
-    setUserMessages([...userMessages, inputValue]);
-
-    if (data?.result) {
-      setAssistantMessages([...assistantMessages, data.result]);
-    }
   };
 
   const handleInputChange = (event) => {
@@ -39,7 +32,7 @@ export default function Home() {
       </Head>
       <main className="container">
         <h1 className={inter.className}>NextJS OpenAI Boilerplate</h1>
-        <p className={inter.className}> Test this boilerplate with a prompt, such as a request for a pet name, and the AI will respond while keeping track of the conversation.
+        <p className={inter.className}> Test this boilerplate with a prompt such as a request for a pet name.
         </p>
         <form>
           <ResponseDisplay data={data} error={error} loading={loading} />
