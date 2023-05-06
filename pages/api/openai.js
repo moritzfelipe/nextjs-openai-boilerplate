@@ -10,8 +10,6 @@ const configuration = new Configuration({
 // Create an instance of the OpenAIApi using the configuration
 const openai = new OpenAIApi(configuration);
 
-console.log("API Key:", process.env.OPENAI_API_KEY);
-
 /**
  * Handle the API request
  * @param {object} req - The HTTP request object
@@ -65,6 +63,7 @@ export default async function (req, res) {
     res
       .status(200)
       .json({ result: completion.data.choices[0].message.content });
+    console.log("The result is: ", completion.data.choices[0].message.content);
   } catch (error) {
     if (error.response) {
       // If there's a response error, log and return the error message
