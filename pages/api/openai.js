@@ -1,5 +1,4 @@
-// filename: openai.js
-// file location: /pages/api/openai.js
+// file: /pages/api/openai.js
 
 import { Configuration, OpenAIApi } from "openai";
 import defaultPrompts from "../../prompts/defaultPrompts";

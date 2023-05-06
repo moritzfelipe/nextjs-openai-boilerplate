@@ -1,5 +1,4 @@
-// filename: 
-// file location: /
+// file: /scripts/generateCodeTXT.js
 
 const fs = require('fs');
 const path = require('path');

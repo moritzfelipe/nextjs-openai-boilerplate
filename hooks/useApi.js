@@ -1,5 +1,4 @@
-// filename: useApi.js
-// file location: /hooks/useApi.js
+// file: /hooks/useApi.js
 import { useState, useEffect } from "react";
 
 const useApi = (url, method, payload) => {

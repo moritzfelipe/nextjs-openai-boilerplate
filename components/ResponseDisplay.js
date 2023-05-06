@@ -1,3 +1,4 @@
+// file: /components/ResponseDisplay.js
 const ResponseDisplay = ({ data, error, loading }) => {
   let content;
 

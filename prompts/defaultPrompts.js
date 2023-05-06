@@ -1,4 +1,4 @@
-// prompts/defaultPrompts.js
+// file: /prompts/defaultPrompts.js
 const defaultPrompts = [
     {
       role: "system",
