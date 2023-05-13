@@ -60,11 +60,14 @@ export default async function (req, res) {
       top_p: 0,
     });
 
-    // Return the generated content as the result
-    res
-      .status(200)
-      .json({ result: completion.data.choices[0].message.content });
-    console.log("The result is: ", completion.data.choices[0].message.content);
+    const resultContent = completion.data.choices[0].message.content;
+    try {
+      const jsonResult = JSON.parse(resultContent);
+      res.status(200).json({ result: jsonResult });
+      console.log("The result is: ", jsonResult);
+    } catch (error) {
+      res.status(500).json({ error: { message: "Failed to parse JSON response." } });
+    }    
   } catch (error) {
     if (error.response) {
       // If there's a response error, log and return the error message

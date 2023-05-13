@@ -3,20 +3,21 @@ const ResponseDisplay = ({ data, error, loading }) => {
   let content;
 
   if (loading) {
-    content = 'Loading...';
+    content = "Loading...";
   } else if (error) {
     content = `Error: ${error.message}`;
   } else if (data) {
-    content = data.result;
+    content = (
+      <>
+        <p>Name: {data.result.name}</p>
+        <p>Description: {data.result.description}</p>
+      </>
+    );
   } else {
-    content = '';
+    content = "";
   }
 
-  return (
-    <div className="response-display">
-      <p>{content}</p>
-    </div>
-  );
+  return <div className="response-display">{content}</div>;
 };
 
 export default ResponseDisplay;
