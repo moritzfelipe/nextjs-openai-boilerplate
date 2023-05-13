@@ -38,7 +38,7 @@ export default function Home() {
         </p>
         <form>
           <ResponseDisplay data={data} error={error} loading={loading} />
-          <TextInput value={inputValue} onChange={handleInputChange} />
+          <TextInput value={inputValue} onChange={handleInputChange} placeholder={'Enter an animal'}/>
           <SubmitButton onClick={handleSubmit} disabled={loading} />
         </form>
       </main>
