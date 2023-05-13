@@ -62,9 +62,9 @@ export default async function (req, res) {
 
     const resultContent = completion.data.choices[0].message.content;
     try {
+      console.log("The result is: ", resultContent);
       const jsonResult = JSON.parse(resultContent);
       res.status(200).json({ result: jsonResult });
-      console.log("The result is: ", jsonResult);
     } catch (error) {
       res.status(500).json({ error: { message: "Failed to parse JSON response." } });
     }    
