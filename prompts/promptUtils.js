@@ -9,6 +9,6 @@ export function getSystemPrompt() {
 export function getUserPrompt(input) {
   return {
     role: "user",
-    content: `Generate a creative pet name and short description for a ${input}. The response should be in JSON format with two fields: "name" and "description".`,
+    content: `Generate a creative pet name and short description for a ${input}. Only respond with a JSON no text. The response should be in JSON format with two fields: "name" and "description".`,
   };
 }
