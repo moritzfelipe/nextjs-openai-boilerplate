@@ -6,6 +6,7 @@ import TextInput from '@/components/TextInput';
 import SubmitButton from '@/components/SubmitButton';
 import ResponseDisplay from '@/components/ResponseDisplay';
 import useApi from '@/hooks/useApi';
+import { getUserPrompt } from "../prompts/promptUtils";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,7 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitValue(`Give me a creative pet name for a ${inputValue}`);
+    setSubmitValue(getUserPrompt(inputValue).content);
   };
 
   const handleInputChange = (event) => {

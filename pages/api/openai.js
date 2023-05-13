@@ -1,7 +1,7 @@
 // file: /pages/api/openai.js
 
 import { Configuration, OpenAIApi } from "openai";
-import defaultPrompts from "../../prompts/defaultPrompts";
+import { getSystemPrompt, getUserPrompt } from "../../prompts/promptUtils";
 
 // Create a configuration object with the OpenAI API key
 const configuration = new Configuration({
@@ -48,7 +48,8 @@ export default async function (req, res) {
       content: payload,
     };
 
-    const messages = [...defaultPrompts, userMessage];
+    const systemMessage = getSystemPrompt();
+    const messages = [systemMessage, userMessage];    
 
     // Call the OpenAI API to create a chat completion
     const completion = await openai.createChatCompletion({
