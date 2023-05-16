@@ -62,7 +62,7 @@ export default async function (req, res) {
 
     const resultContent = completion.data.choices[0].message.content;
     try {
-      console.log("The result is: ", resultContent);
+      console.log("Data from OpenAI API: ", resultContent);
       const jsonResult = JSON.parse(resultContent);
       res.status(200).json({ result: jsonResult });
     } catch (error) {

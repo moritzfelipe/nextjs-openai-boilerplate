@@ -1,5 +1,6 @@
 // file: /components/ResponseDisplay.js
 const ResponseDisplay = ({ data, error, loading }) => {
+  console.log("data in ResponseDisplay", data);
   let content;
 
   if (loading) {
