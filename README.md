@@ -1,23 +1,23 @@
 # Next.js OpenAI Boilerplate
 
-This is a simple Next.js boilerplate project that demonstrates how to integrate the OpenAI API with a Next.js application. The boilerplate includes a basic user interface for submitting prompts and displaying the response from the OpenAI API.
+This is a simplified yet effective Next.js boilerplate project that showcases how to integrate the OpenAI API within a Next.js application. The boilerplate incorporates a user-friendly interface for submitting prompts and rendering the response from the OpenAI API.
 
 ## Features
 
--   Next.js setup with a minimalistic user interface
--   Customizable prompts separated in a different folder
--   Utilizes OpenAI's GPT-3.5 Turbo model for chat completion
--   Built-in error handling and loading state management
--   Responsive design that works on both desktop and mobile devices
+-   Well-structured Next.js configuration with a minimalistic user interface.
+-   Flexibly customizable prompts in a dedicated folder.
+-   Utilizes OpenAI's GPT-3.5 Turbo model for chat completion (Model Version: gpt-3.5-turbo-0613).
+-   Function calling mechanism included to create meaningful interactions with the AI model.
+-   In-built error handling and management of loading states.
 
 ## Getting Started
 
 ### Prerequisites
 
-Before you start, you'll need to have the following installed on your machine:
+Ensure the following are installed on your machine:
 
--   [Node.js](https://nodejs.org/en/download/) (version 12 or higher)
--   [npm](https://www.npmjs.com/get-npm) (usually bundled with Node.js) or [Yarn](https://yarnpkg.com/getting-started/install)
+-   [Node.js](https://nodejs.org/en/download/) (Version 12 or higher)
+-   [npm](https://www.npmjs.com/get-npm) (generally bundled with Node.js) or [Yarn](https://yarnpkg.com/getting-started/install)
 
 ### Installation
 
@@ -25,8 +25,7 @@ Before you start, you'll need to have the following installed on your machine:
 
     `git clone https://github.com/your-username/nextjs-openai-boilerplate.git`
 
-2.  Navigate to the project directory:
-
+2.  Move to the project directory:
 
     `cd nextjs-openai-boilerplate`
 
@@ -38,14 +37,13 @@ Before you start, you'll need to have the following installed on your machine:
 
     `yarn install`
 
-4.  Create a `.env.local` file in the project root directory and add your OpenAI API key:
-
+4.  Create a `.env.local` file in the root directory of the project and include your OpenAI API key:
 
     `OPENAI_API_KEY=your_openai_api_key`
 
-    Replace `your_openai_api_key` with your actual OpenAI API key. You can find your API key in your [OpenAI Dashboard](https://platform.openai.com/account/api-keys).
+    Substitute `your_openai_api_key` with your actual OpenAI API key. Your API key can be located in your [OpenAI Dashboard](https://platform.openai.com/account/api-keys).
 
-5.  Start the development server:
+5.  Kick start the development server:
 
     `npm run dev`
 
@@ -53,19 +51,20 @@ Before you start, you'll need to have the following installed on your machine:
 
     `yarn dev`
 
-6.  Open your browser and navigate to [http://localhost:3000](http://localhost:3000/). You should now see the boilerplate application running.
+6.  Access the application by navigating to [http://localhost:3000](http://localhost:3000/). The boilerplate application should be live now.
 
+OpenAI API: Generating Chat Completions
+---------------------------------------
 
-## OpenAI API: Generating Chat Completions
-
-The `openai.createChatCompletion()` function is part of the OpenAI API, which allows developers to generate text using machine learning models. Specifically, `createChatCompletion()` is used to generate completions for chat-based models, such as the GPT-3.5-turbo model, which is designed for generating responses in a conversational format.
+The `openai.createChatCompletion()` function is an essential part of the OpenAI API, which enables developers to generate text utilizing machine learning models. Specifically, `createChatCompletion()` caters to the generation of completions for chat-oriented models, such as the GPT-3.5-turbo model (version gpt-3.5-turbo-0613), aimed at generating responses in a conversational format.
 
 ### Usage
 
 ```javascript
 const completion = await openai.createChatCompletion({
-  model: "gpt-3.5-turbo",
+  model: "gpt-3.5-turbo-0613",
   messages: messages,
+  functions: functions,
   temperature: 0,
   max_tokens: 510,
   top_p: 0,
@@ -74,30 +73,23 @@ const completion = await openai.createChatCompletion({
 
 ### Parameters
 
-> model: (string, required) - Specifies the name of the model to use for generating completions. In this example, "gpt-3.5-turbo" is used, which is a chat-based language model.
+> model: (string, required) - Indicates the name of the model to be utilized for generating completions. "gpt-3.5-turbo-0613" is used in this example, which is a chat-based language model.
 
-> messages: (array of objects, required) - Specifies an array of message objects, where each object has a role ("system", "user", or "assistant") and content (the actual text of the message). Messages are processed in the order they appear in the array, and the assistant responds accordingly.
+> messages: (array of objects, required) - Indicates an array of message objects. Each object consists of a role ("system", "user", or "assistant") and content (the actual message text). Messages are processed in the order they appear in the array, and the assistant generates the response accordingly.
 
-> temperature: (number, optional) - Controls the randomness of the generated completions. A higher value (e.g., 0.8) makes the output more random, while a lower value (e.g., 0.2) makes it more deterministic.
+> functions: (array of objects, required) - Specifies an array of function objects that represent the assistant's capabilities.
 
-> max_tokens: (number, optional) - Specifies the maximum number of tokens (words or word pieces) in the generated completion. Use this to limit the length of the output.
+> temperature: (number, optional) - Determines the randomness of the generated completions. A higher value (e.g., 0.8) will produce more random outputs, while a lower value (e.g., 0.2) will make the outputs more deterministic.
 
-> top_p: (number, optional) - Controls the diversity of the generated completions by limiting the choices to a subset of the most likely tokens. A lower value (e.g., 0.2) makes the output more focused, while a higher value (e.g., 0.8) makes it more diverse.
+> max_tokens: (number, optional) - Determines the maximum length of the generated completion. If the limit is exceeded, the additional tokens will be discarded. However, bear in mind that very long outputs may require more time to process.
 
-Form more please use the OpenAI [documantation](https://platform.openai.com/docs/introduction).
-
-## Customizing Prompts
-
-To customize the prompts or add new message types, update the `defaultPrompts` array in the `prompts/defaultPrompts.js` file or create new files for different sets of prompts in the `prompts` folder.
-
-## Deploying
-
-To deploy your application, you can use [Vercel](https://vercel.com/), the platform built by the creators of Next.js. Follow the [official Next.js deployment documentation](https://nextjs.org/docs/deployment) for a detailed guide on deploying your Next.js application to Vercel or other hosting providers.
+> top_p: (number, optional) - This parameter is a part of nucleus sampling, a decoding method used in language models. It determines the minimum number of tokens to consider for generating a completion. A higher value will consider more tokens, increasing the randomness.
 
 ## Contributing
-
-Contributions are welcome! If you'd like to contribute, feel free to submit a pull request or create an issue on the repository.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
+This project is licensed under the MIT License.
 
-This project is licensed under the MIT License. See the [LICENSE](https://chat.openai.com/LICENSE) file for more details.
+## Disclaimer
+The use of the OpenAI API and the output it generates depends on the usage policies set by OpenAI. Make sure to review the OpenAI use case policy before using this boilerplate to build applications.
