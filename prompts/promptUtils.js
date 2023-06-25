@@ -23,13 +23,14 @@ export function getFunctions() {
         properties: {
           animalPetName: {
             type: "string",
-            description: "The pet name for the animal",
+            description: "The generated pet name for the animal",
           },
           description: {
             type: "string",
-            description: "The explanation of the pet name",
+            description: "The generated explanation of the pet name",
           },
         },
+        "required": ["animalPetName", "description"]
       },
     },
   ];
