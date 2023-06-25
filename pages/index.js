@@ -17,7 +17,7 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitValue(getUserPrompt(inputValue).content);
+    setSubmitValue(getUserPrompt(inputValue));
   };
 
   const handleInputChange = (event) => {

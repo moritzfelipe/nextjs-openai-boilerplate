@@ -1,7 +1,7 @@
 // file: /pages/api/openai.js
 
 import { Configuration, OpenAIApi } from "openai";
-import { getSystemPrompt, getUserPrompt } from "../../prompts/promptUtils";
+import { getSystemPrompt, getFunctions } from "../../prompts/promptUtils";
 
 // Create a configuration object with the OpenAI API key
 const configuration = new Configuration({
@@ -28,46 +28,30 @@ export default async function (req, res) {
   }
 
   // Extract the payload from the request body
-  const payload = req.body.payload || "";
-  console.log("The payload is: ", payload);
-
-  // Check if the payload is empty
-  if (payload.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please enter a valid input",
-      },
-    });
-    return;
-  }
+  const userMessage = req.body.payload || "";
+  console.log("The userMessage is: ", userMessage);
 
   try {
-    // Create a user message object
-    const userMessage = {
-      role: "user",
-      content: payload,
-    };
 
     const systemMessage = getSystemPrompt();
-    const messages = [systemMessage, userMessage];    
+    const functions = getFunctions();
+    const messages = [systemMessage, userMessage];
 
     // Call the OpenAI API to create a chat completion
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: messages,
-      temperature: 0,
-      max_tokens: 510,
-      top_p: 0,
+      "model": "gpt-3.5-turbo-0613",
+      "messages": messages,
+      "functions": functions
     });
 
-    const resultContent = completion.data.choices[0].message.content;
+    const resultContent = completion.data.choices[0].message.function_call.arguments;
     try {
       console.log("Data from OpenAI API: ", resultContent);
       const jsonResult = JSON.parse(resultContent);
       res.status(200).json({ result: jsonResult });
     } catch (error) {
       res.status(500).json({ error: { message: "Failed to parse JSON response." } });
-    }    
+    }
   } catch (error) {
     if (error.response) {
       // If there's a response error, log and return the error message
