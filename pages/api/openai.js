@@ -42,7 +42,7 @@ export default async function (req, res) {
       "model": "gpt-3.5-turbo-0613",
       "messages": messages,
       "functions": functions,
-      temperature: 0,
+      temperature: 1,
       max_tokens: 510,
       top_p: 0,
     });
