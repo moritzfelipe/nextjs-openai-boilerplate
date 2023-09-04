@@ -1,23 +1,23 @@
 // file: /pages/index.js
-import Head from 'next/head';
-import { Inter } from 'next/font/google';
-import { useState } from 'react';
-import TextInput from '@/components/TextInput';
-import SubmitButton from '@/components/SubmitButton';
-import ResponseDisplay from '@/components/ResponseDisplay';
-import useApi from '@/hooks/useApi';
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import { useState } from "react";
+import TextInput from "@/components/TextInput";
+import SubmitButton from "@/components/SubmitButton";
+import ResponseDisplay from "@/components/ResponseDisplay";
+import useApi from "@/hooks/useApi";
 import { getUserPrompt } from "../prompts/promptUtils";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [submitValue, setSubmitValue] = useState('');
-  const { data, error, loading } = useApi('/api/openai', 'POST', submitValue);
+  const [inputValue, setInputValue] = useState("");
+  const { data, error, loading, fetchData } = useApi();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitValue(getUserPrompt(inputValue));
+    const submitValue = getUserPrompt(inputValue);
+    await fetchData("/api/openai", "POST", submitValue);
   };
 
   const handleInputChange = (event) => {
@@ -34,11 +34,18 @@ export default function Home() {
       </Head>
       <main className="container">
         <h1 className={inter.className}>NextJS OpenAI Boilerplate</h1>
-        <p className={inter.className}> Test this boilerplate: Enter an animal and it will generate a pet name for you.
+        <p className={inter.className}>
+          {" "}
+          Test this boilerplate: Enter an animal and it will generate a pet name
+          for you.
         </p>
         <form>
           <ResponseDisplay data={data} error={error} loading={loading} />
-          <TextInput value={inputValue} onChange={handleInputChange} placeholder={'Enter an animal'}/>
+          <TextInput
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder={"Enter an animal"}
+          />
           <SubmitButton onClick={handleSubmit} disabled={loading} />
         </form>
       </main>
